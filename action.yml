@@ -25,7 +25,7 @@ runs:
       with:
         role-to-assume: arn:aws:iam::${{ inputs.account-id }}:role/${{ inputs.role-name }}
         role-session-name: ${{ inputs.session-name }}
-        aws-region: ${{ inputs.aws-region }}
+        aws-region: ${{ inputs.region }}
 
     - name: Retrieve Secrets from AWS Secrets Manager
       uses: aws-actions/aws-secretsmanager-get-secrets@v2
