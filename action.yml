@@ -13,12 +13,9 @@ inputs:
   session-name:
     description: "The name of the session"
     default: "configure-retrieve-aws-secrets"
-  secret-ids:
-    description: "The IDs of the secrets"
-    required: true
-  parse-json-secrets:
-    description: " If true, JSON secrets will be deserialized, creating a secret environment variable for each key-value pair."
-    default: false
+  secret-branch: 
+    description: "The branch to use for the secrets github.com/<repo>/secrets/<branch>"
+    default: "main"
 
 runs:
   using: "composite"
@@ -33,5 +30,6 @@ runs:
     - name: Retrieve Secrets from AWS Secrets Manager
       uses: aws-actions/aws-secretsmanager-get-secrets@v2
       with:
-        secret-ids: ${{ inputs.secret-ids }}
-        parse-json-secrets: ${{ inputs.parse-json-secrets }}
+        secret-ids: |
+          , github.com/${{ github.repository }}/secrets/${{ secret-branch }}
+        parse-json-secrets: true
