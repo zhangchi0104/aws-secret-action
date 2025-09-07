@@ -31,5 +31,5 @@ runs:
       uses: aws-actions/aws-secretsmanager-get-secrets@v2
       with:
         secret-ids: |
-          , github.com/${{ github.repository }}/secrets/${{ inputs.secret-branch }}
+          , github.com/${{ github.repository }}/${{ inputs.secret-branch }}
         parse-json-secrets: true
